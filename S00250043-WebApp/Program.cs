@@ -1,18 +1,31 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using S00250043_WebApp.Data;
+using Microsoft.EntityFrameworkCore;
+using S00250043_ConsoleApp;
 
 var builder = WebApplication.CreateBuilder(args);
+	builder.Services.AddControllersWithViews();
+	builder.Services.AddRazorPages();
+
+
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ConsoleEcommerceContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ConsoleEcommerceContext>();
 builder.Services.AddControllersWithViews();
+
+
+	builder.Services.AddDbContext<ConsoleEcommerceContext>(
+	    options => options.UseSqlServer(
+	        builder.Configuration
+	            .GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

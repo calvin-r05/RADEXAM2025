@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\S00250043-ClassLibrary\S00250043-ClassLibrary.csproj" />
+    <ProjectReference Include="..\S00250043-ConsoleApp\S00250043-ConsoleApp.csproj" />
   </ItemGroup>
 
 </Project>
